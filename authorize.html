@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <title>Authorize</title>
+  </head>
+  <body>
+    <button type=button>Click to authorize</button>
+    <p>按過就可以關掉了，下一次再按合併就不會跳驗證</p>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <script src="./client.js"></script>
+    <script>
+      var t = window.TrelloPowerUp.iframe({
+        appKey: 'f459e351f335f1dbedd8fd933bee395e',
+        appName: 'test'
+      });
+      t.render(function() {
+        document.querySelector('button').addEventListener('click', function() {
+          t.getRestApi()
+            .authorize({ scope: 'read,write' })
+            .then(function(t) {
+              window.close();
+            });
+        }, false);
+      });
+    </script>
+  </body>
+</html>
